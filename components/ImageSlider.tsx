@@ -67,9 +67,13 @@ const ImageSlider = ({ url, page, limit }: Props) => {
           <IoChevronBackCircleSharp
             className="text-black absolute z-10 left-5 "
             size={30}
-            onClick={() =>
-              currentSlider < imagesData.length -1 && setCurrentSlider((prev) => prev + 1)
-            }
+            onClick={() => {
+              console.log("currentSlider: ", currentSlider);
+              currentSlider >= 0 &&
+                setCurrentSlider((prev) =>
+                  prev === 0 ? imagesData.length - 1 : prev - 1
+                );
+            }}
           />
           {imagesData && imagesData.length !== 0
             ? imagesData.map((image, index) => (
@@ -91,7 +95,8 @@ const ImageSlider = ({ url, page, limit }: Props) => {
             className="text-black z-20 absolute right-5"
             size={30}
             onClick={() =>
-              currentSlider < 10 && setCurrentSlider((prev) => prev + 1)
+              currentSlider < imagesData.length - 1 &&
+              setCurrentSlider((prev) => prev + 1)
             }
           />
           <div className="flex justify-center items-center absolute bottom-4 left-0 right-0 text-center">
